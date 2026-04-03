@@ -19,6 +19,9 @@ public enum AuditLog {
         case xcode          = "Xcode"
         case shell          = "Shell"
         case fileBackup     = "FileBackup"
+        case storage        = "Storage"
+        case keychain       = "Keychain"
+        case api            = "API"
     }
 
     // MARK: - Loggers (one per category for efficient filtering)
@@ -28,7 +31,8 @@ public enum AuditLog {
     nonisolated(unsafe) private static let loggers: [Category: Logger] = {
         var map: [Category: Logger] = [:]
         for cat in [Category.launchAgent, .launchDaemon, .accessibility,
-                    .appleScript, .agentScript, .permission, .web, .mcp, .xcode, .shell, .fileBackup] {
+                    .appleScript, .agentScript, .permission, .web, .mcp, .xcode, .shell,
+                    .fileBackup, .storage, .keychain, .api] {
             map[cat] = Logger(subsystem: subsystem, category: cat.rawValue)
         }
         return map
